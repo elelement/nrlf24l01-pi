@@ -39,12 +39,13 @@ int main()
 		// Introducimos la opción
 		cin >> operacion;
 
-		// read in the string
+		// Componemos el mensaje
 		int cont = 0;
+        cout << "A enviar: 0x";
         for (uint8_t i = 2; i < RXTX_PLOAD_WIDTH; i += 2) 
         {
             buffer_tx[cont++] = (uint8_t) strtoul(operacion.substr(i, 2).c_str(), NULL, 16);
-            printf("enviado : %2X\n", buffer_tx[cont-1]);
+            printf("%02X", buffer_tx[cont-1]);
         }
 
         escribir_mensaje(buffer_tx, RXTX_PLOAD_WIDTH, radio);
@@ -54,10 +55,12 @@ int main()
         leer_mensaje(buffer_rx, RXTX_PLOAD_WIDTH, radio);
 
         cout << endl << endl;
-            // display payload
+        
+        // Mostramos el payload recibido
+        cout << "Recibido: 0x";
         for (uint8_t j = 0; j < RXTX_PLOAD_WIDTH; j ++) 
         {
-            printf("recibido(%i) : %2X\n", j, buffer_rx[j]);
+            printf("%02X", buffer_rx[j]);
         }
 
         cout << endl << endl << endl;
@@ -66,6 +69,8 @@ int main()
 		cout << endl << "Pulse control-c para salir." << endl;
 	}
 }
+
+
 
 void set_up_radio(RF24& radio)
 {
