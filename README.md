@@ -1,7 +1,29 @@
 # nrlf24l01-pi
-Example to communicate two NRLF2401+ modules from a Raspberry Pi. For test purpose only.
+
+Example showing how to use a NRLF2401+ radio module from a Raspberry Pi. I used it for testing purposes in a simple domotic system I'm building:
+
+## Launch
+
+Compile it first using:
+
+```bash
+make clean && make
+```
+
+Then execute it by simply typing (change the name in the makefile if you want):
+
+```bash
+sudo ./domomain
+```
+
+The program expects inputs in hexadecimal format up to 32 bytes. For example:
+
+```
+0x510332100313140000000
+```
 
 ## Basics
+
 Declare your RF24 object using "set_up_radio()":
 
 ```cpp
@@ -45,6 +67,6 @@ uint8_t buffer_rx[32];
 leer_mensaje(buffer_rx, 32, radio);
 for (uint8_t j = 0; j < 32; j ++) 
 {
-    printf("%2X ", j, buffer_rx[j]);
+    printf("%2X ", buffer_rx[j]);
 }
 ```
